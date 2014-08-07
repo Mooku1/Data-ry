@@ -1,0 +1,8 @@
+<h1>Input a new data point</h1>
+
+<%= form_for @answer do |f| %>
+	<%= f.number_field :value, placeholder: "Value" %>
+	<%= f.date_field :date, placeholder: "Date" %>
+	<%= f.text_field :note, placeholder: "Note" %>
+	<%= f.submit %>
+<% end %>

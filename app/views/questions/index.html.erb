@@ -1,0 +1,13 @@
+<h1>Questions</h1>
+	
+	<ul>
+		<% @questions.each do |q| %>
+		<li>
+			<%= q.text %>
+			<%= @answers.each do |a| %>
+				<%= a.value %>
+			<% end %>
+			<%= link_to "Add a new data point", new_answer_path %>
+		</li>
+		<% end %>
+	</ul>

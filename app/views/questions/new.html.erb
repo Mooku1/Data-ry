@@ -1,0 +1,7 @@
+<h1>Questions</h1>
+
+<div>What question would you like to track?</div>
+<%= form_for @question do |f| %>
+  <%= f.text_field :text, placeholder: "Question" %>
+  <%= f.submit "Create Question" %>
+<% end %>
