@@ -1,0 +1,7 @@
+<h1>Edit data point for <%= @answer.date %></h1>
+
+<%= form_for [@question, @answer] do |f| %>
+	<%= f.number_field :value, placeholder: "Value" %>
+	<%= f.text_field :note, placeholder: "Note" %>
+	<%= f.submit %>
+<% end %>

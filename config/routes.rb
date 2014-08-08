@@ -1,5 +1,9 @@
 Project2::Application.routes.draw do
 
+  resources :questions do
+    resources :answers
+  end
+
 	resource :session, only: [:new, :create, :destroy]
 	
 	get 'users/' => 'users#index', as: :users
@@ -18,26 +22,14 @@ Project2::Application.routes.draw do
 	
 	get 'users/:id/reactivate' => 'users#reactivate', as: :reactivate_user
 	
-	get 'questions/' => 'questions#index', as: :questions
-	
-    get 'questions/new' => 'questions#new', as: :new_question
-	
-	post 'questions/' => 'questions#create'
-	
-	get 'questions/:id' => 'questions#show', as: :question
-	
-	get 'answers/' => 'answers#index', as: :answers
-	
-	get 'answers/new' => 'answers#new', as: :new_answer
-	
-	post 'answers/' => 'answers#create'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
 	
-	root 'users#index'
+	root 'questions#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

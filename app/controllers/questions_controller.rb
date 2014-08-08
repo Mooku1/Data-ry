@@ -1,12 +1,17 @@
 class QuestionsController < ApplicationController
 	
+	before_action :check_user, :check_security
+
 	def index
-		@questions = Question.all
-		@answers = Question.find(params[:id]).answers
+		@questions = current_user.questions
 	end
 	
 	def show
 		@question = Question.find(params[:id])
+		if (!current_user) || (@question.user != current_user)
+			redirect_to new_session_path
+			return
+		end
 	end
 	
 	def new
@@ -14,26 +19,55 @@ class QuestionsController < ApplicationController
 	end
 	
 	def create
-		@question = Question.new(params.require(:question).permit(:text))
-		if @question.save
-			redirect_to question_path
+		question = current_user.questions.new(params.require(:question).permit(:text))
+		if question.save
+			redirect_to questions_path
 		else
 			render :new
 		end
 	end
 	
 	def edit
-	
+		@question = Question.find(params[:id])
+		if (!current_user) || (@question.user != current_user)
+			redirect_to new_session_path
+			return
+		end
 	end
 	
 	def update
-	
+		@question = Question.find(params[:id])
+		@question.user = current_user
+		if (!current_user) || (@question.user != current_user)
+			redirect_to new_session_path
+			return
+		elsif (@question.user == current_user)
+			if @question.update_attributes(params.require(:question).permit(:text))
+				redirect_to questions_path
+			else
+				render :edit
+			end
+		else
+			redirect_to new_session_path
+			return
+		end
 	end
 	
 	def destroy
-	
+		Question.find(params[:id]).destroy
+		redirect_to questions_path
 	end
+
+private
+	def check_user
+		if !current_user
+			redirect_to new_session_path
+			return
+		end
+	end	
 	
-	
+	def check_security
+		
+	end
 
 end

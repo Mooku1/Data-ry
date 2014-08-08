@@ -4,10 +4,9 @@
 		<% @questions.each do |q| %>
 		<li>
 			<%= q.text %>
-			<%= @answers.each do |a| %>
-				<%= a.value %>
-			<% end %>
-			<%= link_to "Add a new data point", new_answer_path %>
+			<%= link_to "View Question", question_path(q.id) %>
 		</li>
 		<% end %>
 	</ul>
+
+<%= link_to "Add a New Question", new_question_path %>
