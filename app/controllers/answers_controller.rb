@@ -6,10 +6,14 @@ class AnswersController < ApplicationController
 	end
 	
 	def create
-		answer = Answer.new(params.require(:answer).permit(:value, :date, :note))
-		answer.question = @question
-		if answer.save
-			redirect_to question_path(@question.id)
+		@answer = Answer.new(params.require(:answer).permit(:value, :date, :note))
+		if @question.answers.none? { |a| a.date == @answer.date }
+			@answer.question = @question
+			if @answer.save
+				redirect_to question_path(@question.id)
+			else
+				render :new
+			end
 		else
 			render :new
 		end
