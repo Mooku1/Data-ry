@@ -1,3 +1,74 @@
 // Place all the styles related to the Answers controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.showAnswerContainer{
+	
+	.answerInfoContainer{
+		width: 90%;
+		margin: 0 auto;
+		padding: 20px;
+		border-radius: 10px;
+		background-color: white;
+		color: rgba(81,81,81, 1);
+
+		h1{
+			margin: 0 0 30px 0;
+		}
+
+		.answerFormContainer{
+			width: 90%;
+			margin: 0 auto;
+			font-size: 20px;
+
+			.inputField{
+				height: 50px;
+				padding: 10px;
+				border-radius: 5px;
+				-webkit-border-radius: 6px;
+			    -moz-border-radius: 6px;
+			    border: 1px solid rgba(130,130,130,1);
+			    -webkit-box-sizing: border-box;
+			    -moz-box-sizing: border-box;
+			    box-sizing: border-box;
+			}
+			
+			.inputDate{
+				width: 20%;
+				margin: 20px 0 20px 16px;
+			}
+
+			.inputValue{
+				width: 10%;
+				text-align: center;
+				margin: 20px 0 20px 10px;
+			}
+
+			.inputNote{
+				width: 90%;
+				margin: 20px 0 20px 15px;
+			}
+
+			.buttonCenter{
+				margin: 20px auto;
+				width: 100%;
+				text-align: center;
+
+				.inputButton{
+					padding: 10px;
+					width: 30%;
+					background-color: rgba(81,81,81, 1);
+					border: none;
+					border-radius: 5px;
+					color: white;
+					font-size: 22px;
+					font-weight: 200;
+					letter-spacing: 1px;
+					outline: none;
+				}
+			}
+		}
+
+	}
+
+}

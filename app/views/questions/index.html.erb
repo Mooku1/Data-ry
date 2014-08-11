@@ -1,12 +1,20 @@
-<h1>Questions</h1>
-	
-	<ul>
-		<% @questions.each do |q| %>
-		<li>
-			<%= q.text %>
-			<%= link_to "View Question", question_path(q.id) %>
-		</li>
-		<% end %>
-	</ul>
+<div class="showContainer">
 
-<%= link_to "Add a New Question", new_question_path %>
+	<h1>Questions</h1>
+		
+		<ul>
+			<% @questions.each do |q| %>
+			<li>
+				<div><%= q.text %></div>
+				<div class="questionViewLink" ><%= link_to "View Question", question_path(q.id) %></div>
+			</li>
+			<% end %>
+		</ul>
+
+	<div class="linkActions">
+
+		<%= link_to "Add a New Question", new_question_path %>
+
+	</div>
+
+<div>

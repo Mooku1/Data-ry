@@ -1,7 +1,27 @@
-<h1>Edit data point for <%= @answer.date %></h1>
+<div class="showAnswerContainer">
 
-<%= form_for [@question, @answer] do |f| %>
-	<%= f.number_field :value, placeholder: "Value" %>
-	<%= f.text_field :note, placeholder: "Note" %>
-	<%= f.submit %>
-<% end %>
+	<div class="answerInfoContainer">
+
+		<h1>Edit data point for <%= @answer.date %></h1>
+
+			<div class="answerFormContainer">
+
+				<%= form_for [@question, @answer] do |f| %>
+					Value: <%= f.number_field :value, :class => "inputField inputValue", placeholder: "Value" %><br>
+					Note: <%= f.text_field :note, :class => "inputField inputNote", placeholder: "Note" %>
+					<div class="buttonCenter" ><%= f.submit "Update", :class => 'inputButton' %>
+					</div>
+				<% end %>
+
+				<div class="linkActions">
+
+					<%= link_to "Cancel", question_path(@question) %>
+					<%= link_to "Delete", question_answer_path(@question.id, @answer.id), method: :delete, data: {confirm: 'Are you sure you want to delete this data point?'} %>
+
+				</div>
+
+			</div>
+
+	</div>
+
+</div>

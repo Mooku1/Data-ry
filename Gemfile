@@ -5,6 +5,8 @@ gem 'rails', '4.0.4'
 
 gem 'mongoid'
 
+gem 'bootstrap-sass', '~> 3.2.0.1'
+
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.2'

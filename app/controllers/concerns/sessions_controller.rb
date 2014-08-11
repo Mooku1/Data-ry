@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
 				# Store as a cookie in the user's browser the ID of them,
 				# indicating that they are logged in
 				session[:user_id] = u.id.to_s
-				redirect_to users_path
+				redirect_to questions_path
 			end
 		else
 			redirect_to new_session_path
@@ -24,6 +24,6 @@ class SessionsController < ApplicationController
 
 	def destroy
 		reset_session
-		redirect_to users_path
+		redirect_to root_path
 	end
 end

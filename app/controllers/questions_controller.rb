@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
 	
-	before_action :check_user, :check_security
+	before_action :check_user
 
 	def index
 		@questions = current_user.questions
@@ -8,6 +8,7 @@ class QuestionsController < ApplicationController
 	
 	def show
 		@question = Question.find(params[:id])
+		@answers = @question.answers.sort_by &:date
 		if (!current_user) || (@question.user != current_user)
 			redirect_to new_session_path
 			return
@@ -65,9 +66,5 @@ private
 			return
 		end
 	end	
-	
-	def check_security
-		
-	end
 
 end

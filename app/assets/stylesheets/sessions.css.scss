@@ -1,0 +1,80 @@
+// Place all the styles related to the sessions controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+body{
+	background-color: rgba(0,180,255, 1);
+	color: white;
+	font-family: 'Open Sans Condensed', sans-serif;
+
+}
+
+.newSessionPage{
+	height: 100%;
+	width: 100%;
+
+	
+	/* ------ Login Container ------ */
+
+	.loginContainer{
+		margin: 50px auto;
+		width: 400px;
+		text-align: center;
+		padding: 20px 20px 40px;
+		border-radius: 10px;
+
+		h1{
+			font-size: 50px
+		}
+
+		.inputField{
+			width: 300px;
+			height: 50px;
+			-webkit-border-radius: 6px;
+		    -moz-border-radius: 6px;
+		    border: 1px solid rgba(130,130,130,1);
+		    -webkit-box-sizing: border-box;
+		    -moz-box-sizing: border-box;
+		    box-sizing: border-box;
+			font-size: 20px;
+			margin: 20px auto;
+			font-family: 'Open Sans Condensed', sans-serif;
+			padding: 10px;
+			color: rgba(81,81,81, 1);
+		}
+
+		.inputField:focus{
+			border: 2px solid rgba(81,81,81, 1);
+			outline: none;
+		}
+
+		.inputButton{
+			margin: 10px 0;
+			padding: 10px;
+			width: 70%;
+			background-color: rgba(81,81,81, 1);
+			border: none;
+			border-radius: 5px;
+			color: white;
+			font-size: 22px;
+			font-weight: 200;
+			letter-spacing: 1px;
+			outline: none;
+		}
+
+	}
+
+	.aboutContainer{
+			width: 60%;
+			margin: 40px auto;
+
+			.aboutHead{
+				font-size: 80px;
+			}
+
+			.aboutText{
+				font-size: 28px;
+			}
+
+		}
+}

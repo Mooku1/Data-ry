@@ -1,20 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Project2</title>
+  <title>Data-ry: The Daily Data Visualization App</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag "//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<% if current_user %>
-	Welcome, <%= current_user.username %>!
-	<%= link_to "Log out", session_path, method: :delete %>
-<% else %>
-	<%= link_to "Sign up", new_user_path %>
-	<%= link_to "Log in", new_session_path %>
-<% end %>
+	<nav id="navBar" role="navigation">
+	  <div class="container-fluid">
+	    <!-- Brand and toggle get grouped for better mobile display -->
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="#">Brand</a>
+	    </div>
+
+	    <!-- Collect the nav links, forms, and other content for toggling -->
+	    <div class="collapse navbar-collapse">
+	       <% if current_user %>
+		      <ul class="nav navbar-nav navbar-right">
+		        <li >
+		          <a href="#" id="menuToggle" data-toggle="dropdown"><i class="fa fa-bars fa-3x"></i></span></a>
+		          <ul class="dropdown-menu" role="menu">
+		            <li><%= link_to "View Questions", questions_path, method: :get %></li>
+		            <li><%= link_to "Add a New Question", new_question_path, method: :get %></li>
+		            <li class="divider"></li>
+		            <li><%= link_to "Log out", session_path, method: :delete %></li>
+		          </ul>
+		        </li>
+		      </ul>
+		   <% else %>
+		   		<div class="nav navbar-nav navbar-right">
+					<%= link_to "Sign up", new_user_path %>
+					<%= link_to "Log in", new_session_path %>
+				</div>
+		   <% end %>
+	    </div><!-- /.navbar-collapse -->
+	  </div><!-- /.container-fluid -->
+	</nav>
 
 <%= yield %>
 
