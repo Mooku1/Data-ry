@@ -30,17 +30,20 @@ html{
 	padding: 20px 0;
 }
 
-#navBar a{
-	color: black;
+#menuToggle{
 	font-size: 20px;
 	margin: 0 20px;
 	color: white;
 }
 
+.dropdown-menu a{
+	color: black;
+	font-size: 20px;
+}
+
 #menuToggle{
 	background-color: rgba(255,255,255,0);
 	outline: none;
-	color: white;
 }
 
 .linkActions{
@@ -51,4 +54,44 @@ html{
 		padding: 0 40px;
 	}
 }
+
+.inputField{
+	width: 300px;
+	height: 50px;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border: 1px solid rgba(130,130,130,1);
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	font-size: 20px;
+	margin: 20px auto;
+	font-family: 'Open Sans Condensed', sans-serif;
+	padding: 10px;
+	color: rgba(81,81,81, 1);
+}
+
+.inputField:focus{
+	border: 2px solid rgba(81,81,81, 1);
+	outline: none;
+}
+
+.buttonCenter{
+		margin: 20px auto;
+		width: 100%;
+		text-align: center;
+
+		.inputButton{
+			padding: 10px;
+			width: 30%;
+			background-color: rgba(81,81,81, 1);
+			border: none;
+			border-radius: 5px;
+			color: white;
+			font-size: 22px;
+			font-weight: 200;
+			letter-spacing: 1px;
+			outline: none;
+		}
+	}
 

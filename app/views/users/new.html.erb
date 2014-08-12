@@ -5,11 +5,11 @@
 	<div class="signUpInputContainer">
 
 		<%= form_for @user do |f| %>
-			<%= f.text_field :username, placeholder: "Name" %><br />
-			<%= f.text_field :email, placeholder: "Email" %><br />
-			<%= f.password_field :password, placeholder: "Password" %><br />
-			<%= f.password_field :password_confirmation, placeholder: "Confirm Password" %>
-			<%= f.submit %>
+			<%= f.text_field :username, placeholder: "Name", :class => 'inputField' %><br />
+			<%= f.text_field :email, placeholder: "Email", :class => 'inputField' %><br />
+			<%= f.password_field :password, placeholder: "Password", :class => 'inputField' %><br />
+			<%= f.password_field :password_confirmation, placeholder: "Confirm Password", :class => 'inputField' %><br />
+			<div class="buttonCenter" ><%= f.submit "Sign Up", :class => 'inputButton' %>
 		<% end %>
 
 	</div>

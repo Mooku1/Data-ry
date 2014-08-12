@@ -1,7 +1,21 @@
-<h1>Questions</h1>
+<div class="newQuestionContainer">
 
-<div>What question would you like to track?</div>
-<%= form_for @question do |f| %>
-  <%= f.text_field :text, placeholder: "Question" %>
-  <%= f.submit "Create Question" %>
-<% end %>
+	<h1>What question would you like to track?</h1>
+		<%= form_for @question do |f| %>
+			<div class="inputCenter">
+				<%= f.text_field :text, placeholder: "Question", :class => "questionInputField" %>
+			</div>
+		  
+			<div class="buttonCenter">
+			 	 <%= f.submit "Create Question", :class => "inputButton" %>
+			</div>
+
+		<% end %>
+
+		<div class="linkActions">
+
+			<%= link_to "Cancel", questions_path(@question.id) %>
+
+		</div>
+
+</div>

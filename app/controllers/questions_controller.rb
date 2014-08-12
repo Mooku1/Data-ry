@@ -9,6 +9,7 @@ class QuestionsController < ApplicationController
 	def show
 		@question = Question.find(params[:id])
 		@answers = @question.answers.sort_by &:date
+		gon.question_json = @answers
 		if (!current_user) || (@question.user != current_user)
 			redirect_to new_session_path
 			return

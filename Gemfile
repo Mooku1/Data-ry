@@ -7,12 +7,16 @@ gem 'mongoid'
 
 gem 'bootstrap-sass', '~> 3.2.0.1'
 
+gem 'd3_rails'
+
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.2'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
+
+gem 'gon'
 
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
