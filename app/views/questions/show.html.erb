@@ -37,46 +37,4 @@
 
 	</div>
 
-	<%= javascript_tag do %>
-
-
-		window.onload = setTimeout(function(){  //must set timeout due to lag in rails app
-
-			var data = gon.question_json;
-
-
-			var w = document.getElementById("questionGraph").offsetWidth;
-			var h = document.getElementById("questionGraph").offsetHeight;
-			var padding = 5;
-
-			//Need to count range of days to account for missing days in the graph
-
-			var yScale = d3.scale.linear()
-						.domain([0, d3.max(data, function(d) { return d.value })])
-						.range([0, h]);
-
-			var svg = d3.select("#questionGraph")
-						.append("svg")
-						.attr("width", w)
-						.attr("height", h);
-
-			svg.selectAll("rect")
-						.data(data)
-						.enter()
-						.append("rect")
-						.attr("x", function(d, i) {
-							return i * (w / data.length);
-						})
-						.attr("y", function(d) {
-							return h - yScale(d.value);
-						})
-						.attr("width", w / data.length - padding)
-						.attr("height", function(d) {
-							return yScale(d.value);
-						})
-						.attr("fill", "rgb(0,0,255)");
-
-		}, 0001);
-	<% end %>
-
 </div>

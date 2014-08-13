@@ -6,6 +6,7 @@
   <%= stylesheet_link_tag "//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" %>
   <%= include_gon %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= yield :javascript_includes %>
   <%= csrf_meta_tags %>
 </head>
 <body>
