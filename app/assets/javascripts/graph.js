@@ -6,8 +6,8 @@ $(document).on('ready page:load', function() {
 			//Get height and width of svg div
 			var w = document.getElementById("questionGraph").offsetWidth;
 			var h = document.getElementById("questionGraph").offsetHeight;
-			var padding = 20;
-			var bottomPadding = 30;
+			var padding = 5;
+			var bottomPadding = 50;
 
 			
 			
@@ -44,7 +44,7 @@ $(document).on('ready page:load', function() {
 
 			//Find number of days between first and last days
 			var dayToMs = 1000 * 60 * 60 * 24;  //Convert days to milliseconds
-			var totalDays = Math.round(Math.abs(lastDate.getTime() - firstDate.getTime())/dayToMs);
+			var totalDays = Math.round(Math.abs(lastDate.getTime() - firstDate.getTime())/dayToMs) + 1;
 			
 
 			
@@ -54,11 +54,11 @@ $(document).on('ready page:load', function() {
 			//missing dates into a ticks aray
 
 			//Function used to determine ticks 
-			var countTicks = function(data, spacing){  //data is the data to pass through, spacing is the how many ticks you want (1 of 2, 1 of 3, etc.)
+			var countTicks = function(data, steps){  //data is the data to pass through, steps indicate intervals
 				var dateTicks = [];
 				var day_to_ms = 1000 * 60 * 60 * 24;
 					for (i = 0; i <= totalDays; ++i){
-						if (i%spacing == 0){  //Find out if the day is an even amount of days away from first date
+						if (i%steps == 0){  //Find out if the day is an even amount of days away from first date
 							dateTicks.push(d3.time.day.offset(firstDate, i))  //If it is, push the date into the ticks array
 						}
 					}
@@ -78,7 +78,7 @@ $(document).on('ready page:load', function() {
 			//Set up the y scale so that the maximum is the highest value
 			var yScale = d3.scale.linear()
 						.domain([0, d3.max(data, function(d) { return d.value })])
-						.range([0, h]);
+						.range([0, h - bottomPadding]);
 
 			//Set up the x axis
 			var xAxis = d3.svg.axis()
@@ -86,7 +86,7 @@ $(document).on('ready page:load', function() {
 						.orient("bottom")
 						.ticks(d3.time.days, 1)
 						.tickFormat(d3.time.format('%d %b'))
-						.tickValues(countTicks(data, 2)) //call the ticks function to create ticks
+						.tickValues(countTicks(data, Math.ceil(totalDays/10))) //call the ticks function to create ticks
 						.tickSize(1)
 						.tickPadding(8);
 
@@ -148,7 +148,11 @@ $(document).on('ready page:load', function() {
 				.call(xAxis)
 				.selectAll("text")
 					.attr("font-size", 14)
-					.attr("dx", "1.2em");
+					.attr("dx", (totalDays < 10 ? (w/(totalDays + 1) - padding)/2 : -25) + "px")
+					.attr("dy", (totalDays < 10 ? 10 : (w/(totalDays + 1) - padding)/2 - 7) + "px")
+					.attr("transform", function(){
+						return "rotate("+(totalDays < 10 ? 0 : -90)+")"
+					});
 
 
 });
