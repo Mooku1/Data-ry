@@ -7,6 +7,7 @@ $(document).on('ready page:load', function() {
 			var w = document.getElementById("questionGraph").offsetWidth;
 			var h = document.getElementById("questionGraph").offsetHeight;
 			var padding = 5;
+			var leftPadding = 10;
 			var bottomPadding = 50;
 
 			
@@ -90,7 +91,12 @@ $(document).on('ready page:load', function() {
 						.tickSize(1)
 						.tickPadding(8);
 
-
+			//Set up the y axis
+			var yAxis = d3.svg.axis()
+						.scale(yScale)
+						.orient("left")
+						.ticks(5)
+						.tickSize(1)
 			
 
 			// ------ Draw the SVG element ------ //
@@ -122,7 +128,7 @@ $(document).on('ready page:load', function() {
 						
 						//Set starting x position of each bar of the bar graph
 						.attr("x", function(d) {
-							return xScale(convertDate(d.date)); //Starting position depends on the number of days between first and last
+							return xScale(convertDate(d.date)) + padding; //Starting position depends on the number of days between first and last
 						})
 						
 						//Set the starting y position of each bar
@@ -148,11 +154,18 @@ $(document).on('ready page:load', function() {
 				.call(xAxis)
 				.selectAll("text")
 					.attr("font-size", 14)
-					.attr("dx", (totalDays < 10 ? (w/(totalDays + 1) - padding)/2 : -25) + "px")
-					.attr("dy", (totalDays < 10 ? 10 : (w/(totalDays + 1) - padding)/2 - 7) + "px")
+					.attr("dx", (totalDays < 10 ? (w/(totalDays + 1) - padding) : -25) + "px")
+					.attr("dy", (totalDays < 10 ? "10px" : (w/(totalDays + 1) - padding*4) + "px"))
 					.attr("transform", function(){
 						return "rotate("+(totalDays < 10 ? 0 : -90)+")"
 					});
+
+			svg.append("g")
+				.attr("class", "axis")
+				.attr("transform", "translate("+(padding+leftPadding)+",0)")
+				.call(yAxis)
+				.selectAll("text")
+					.attr("font-size", 14);
 
 
 });
