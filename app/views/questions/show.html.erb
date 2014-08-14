@@ -2,8 +2,31 @@
 
 	<h1><%= @question.text %></h1>
 
-	<div id="questionGraph">
+	<div class="dashboardContainer">
 
+		<div class="row">
+			<div class="col-lg-4">
+				<div id="maximumDataPoint">
+					Highest Value Achieved:
+					<div id="maxValue"></div>
+					last achieved on:
+					<div id="maxValueDate">
+					</div>
+				</div>
+				<div id="minimumDataPoint">
+					Lowest Value Achieved:
+					<div id="minValue"></div>
+					last achieved on:
+					<div id="minValueDate">
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-8">
+		  		<div id="questionGraph">
+
+				</div>
+			</div>
+		</div>
 	</div>
 
 	<table class="table">

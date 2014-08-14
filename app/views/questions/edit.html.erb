@@ -1,0 +1,25 @@
+<div class="newQuestionContainer">
+
+	<h1>What question would you like to track?</h1>
+		<%= form_for @question do |f| %>
+			<div class="inputCenter">
+				<div>Question:  (i.e.
+				 How many hours of sleep did I get last night?)</div>
+				<%= f.text_field :text, placeholder: "Question", :class => "questionInputField" %>
+				<div>Units (i.e. hours, miles, hugs...):</div>
+				<%= f.text_field :units, placeholder: "Units" %>
+			</div>
+		  
+			<div class="buttonCenter">
+			 	 <%= f.submit "Create Question", :class => "inputButton" %>
+			</div>
+
+		<% end %>
+
+		<div class="linkActions">
+
+			<%= link_to "Cancel", questions_path(@question.id) %>
+
+		</div>
+
+</div>

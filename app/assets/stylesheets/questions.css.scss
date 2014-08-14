@@ -72,10 +72,16 @@
 		
 	}
 
-	#questionGraph{
-		width: 400px;
-		height: 300px;
-		margin: 50px auto;
+	.dashboardContainer{
+
+		width: 90%;
+
+		#questionGraph{
+				width: 400px;
+				height: 300px;
+				margin: 0 auto;
+			}
+
 	}
 
 

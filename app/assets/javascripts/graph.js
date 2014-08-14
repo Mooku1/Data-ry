@@ -1,20 +1,59 @@
 $(document).on('ready page:load', function() {
 
+			
+	// ------ Set Up Dashboard Data ------ //
+
 			//Specify the data
 			var data = gon.question_json;
+
+			//Specify the units in which the data is measured
+			var units = gon.units;
+
+			// --- Maximum Data Point --- //
+
+			//Find the maximum value
+			var maximumValue = d3.max(data, function(d) {
+				return d.value
+			});
+
+			//Find the last date in which the maximum occurred
+			for (i = 0; i < data.length; ++i){
+				if (data[i].value == maximumValue) {
+					var maximumDataPoint = data[i]
+				}
+			}
+			
+			// --- Minimum Data Point --- //
+			
+			//Find the last date in which the min
+			var minimumValue = d3.min(data, function(d) {
+				return d.value
+			});
+			
+			//Find the last date in which the maximum occurred
+			for (i = 0; i < data.length; ++i){
+				if (data[i].value == minimumValue) {
+					var minimumDataPoint = data[i]
+				}
+			}
+
+
+	// ------ Dimensions of the Graph ------ //
 
 			//Get height and width of svg div
 			var w = document.getElementById("questionGraph").offsetWidth;
 			var h = document.getElementById("questionGraph").offsetHeight;
 			var padding = 5;
-			var leftPadding = 10;
+			var leftPadding = 30;
 			var bottomPadding = 50;
+			var topPadding = 20;
 
 			
 			
 
-			// ------ Convert Dates ------ //
-			//D3 is not recognizing the dates from Ruby properly, so we must convert them.
+	// ------ Convert Dates ------ //
+	//D3 is not recognizing the dates from Ruby properly, so we must convert them
+	//to a readable format.
 
 			//Convert latest date string in JSON to a new JavaScrit date by subsetting the string and evaluating it as new Date object
 			var lastDate = new Date(
@@ -39,9 +78,9 @@ $(document).on('ready page:load', function() {
 			
 			
 
-			// ------ Count Total Days ------ //
-			//We need to count the total days accounted for in the dataset so that we can
-			//account for missing days in the graph.
+	// ------ Count Total Days ------ //
+	//We need to count the total days accounted for in the dataset so that we can
+	//account for missing days in the graph.
 
 			//Find number of days between first and last days
 			var dayToMs = 1000 * 60 * 60 * 24;  //Convert days to milliseconds
@@ -69,17 +108,17 @@ $(document).on('ready page:load', function() {
 			
 			
 
-			// ------ D3 Graph Details ------ //
+	// ------ D3 Graph Details ------ //
 
 			//Set up the x scale so that it includes the days we want it to include
 			var xScale = d3.time.scale()
 						.domain([firstDate, d3.time.day.offset(lastDate, 1)])
-						.rangeRound([0, w]);
+						.rangeRound([0 + leftPadding + padding*8, w]);
 
 			//Set up the y scale so that the maximum is the highest value
 			var yScale = d3.scale.linear()
-						.domain([0, d3.max(data, function(d) { return d.value })])
-						.range([0, h - bottomPadding]);
+						.domain([0, maximumValue])
+						.range([h - bottomPadding, 0 + topPadding]);
 
 			//Set up the x axis
 			var xAxis = d3.svg.axis()
@@ -88,7 +127,7 @@ $(document).on('ready page:load', function() {
 						.ticks(d3.time.days, 1)
 						.tickFormat(d3.time.format('%d %b'))
 						.tickValues(countTicks(data, Math.ceil(totalDays/10))) //call the ticks function to create ticks
-						.tickSize(1)
+						.tickSize(0)
 						.tickPadding(8);
 
 			//Set up the y axis
@@ -96,10 +135,13 @@ $(document).on('ready page:load', function() {
 						.scale(yScale)
 						.orient("left")
 						.ticks(5)
-						.tickSize(1)
+						.tickSize(0)
+						.tickFormat(function(d){
+							return d + " " + units
+						})
 			
 
-			// ------ Draw the SVG element ------ //
+	// ------ Draw the SVG element ------ //
 
 			var svg = d3.select("#questionGraph")
 						.append("svg")
@@ -109,7 +151,7 @@ $(document).on('ready page:load', function() {
 
 			
 
-			// ------ Append data to the SVG element ------ //
+	// ------ Append data to the SVG element ------ //
 
 			svg.selectAll("rect")
 						.data(data)
@@ -128,12 +170,12 @@ $(document).on('ready page:load', function() {
 						
 						//Set starting x position of each bar of the bar graph
 						.attr("x", function(d) {
-							return xScale(convertDate(d.date)) + padding; //Starting position depends on the number of days between first and last
+							return xScale(convertDate(d.date)); //Starting position depends on the number of days between first and last
 						})
 						
 						//Set the starting y position of each bar
 						.attr("y", function(d) {
-							return h - yScale(d.value) - bottomPadding;  //Starting y position needs to be set to the height of the svg element minus the height of the bar 
+							return yScale(d.value);  //Starting y position needs to be set to the height of the svg element minus the height of the bar 
 						})
 
 						//Set the width of each bar
@@ -141,7 +183,7 @@ $(document).on('ready page:load', function() {
 						
 						//Set the height of each bar
 						.attr("height", function(d) {
-							return yScale(d.value);
+							return yScale(0) - yScale(d.value);
 						})
 
 						//Set the fill color of the bars
@@ -154,7 +196,7 @@ $(document).on('ready page:load', function() {
 				.call(xAxis)
 				.selectAll("text")
 					.attr("font-size", 14)
-					.attr("dx", (totalDays < 10 ? (w/(totalDays + 1) - padding) : -25) + "px")
+					.attr("dx", (totalDays < 10 ? ((w/(totalDays + 1))/2 ) : -25) + "px")
 					.attr("dy", (totalDays < 10 ? "10px" : (w/(totalDays + 1) - padding*4) + "px"))
 					.attr("transform", function(){
 						return "rotate("+(totalDays < 10 ? 0 : -90)+")"
@@ -165,7 +207,29 @@ $(document).on('ready page:load', function() {
 				.attr("transform", "translate("+(padding+leftPadding)+",0)")
 				.call(yAxis)
 				.selectAll("text")
+					.attr("dx", 20)
 					.attr("font-size", 14);
+
+
+
+	// ------ Populate Data in the Dashboard ------ //
+
+			//In order to get JavaScript month names, we need to set an array
+			//of month names.
+
+			var monthArray = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+			
+			//Create a string of our maximum data point date
+			var maxDateString = convertDate(maximumDataPoint.date).getDay() + " " + monthArray[convertDate(maximumDataPoint.date).getMonth()] + " " + convertDate(maximumDataPoint.date).getFullYear();
+
+			//Create a string of our maximum data point date
+			var minDateString = convertDate(minimumDataPoint.date).getDay() + " " + monthArray[convertDate(minimumDataPoint.date).getMonth()] + " " + convertDate(minimumDataPoint.date).getFullYear();
+
+			document.getElementById("maxValue").innerHTML = maximumValue;
+			document.getElementById("maxValueDate").innerHTML = maxDateString;
+
+			document.getElementById("minValue").innerHTML = minimumValue;
+			document.getElementById("minValueDate").innerHTML = minDateString
 
 
 });

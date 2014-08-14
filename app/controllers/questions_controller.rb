@@ -10,6 +10,7 @@ class QuestionsController < ApplicationController
 		@question = Question.find(params[:id])
 		@answers = @question.answers.sort_by &:date
 		gon.watch.question_json = @answers
+		gon.watch.units = @question.units
 		if (!current_user) || (@question.user != current_user)
 			redirect_to new_session_path
 			return
@@ -21,7 +22,7 @@ class QuestionsController < ApplicationController
 	end
 	
 	def create
-		question = current_user.questions.new(params.require(:question).permit(:text))
+		question = current_user.questions.new(params.require(:question).permit(:text, :units))
 		if question.save
 			redirect_to questions_path
 		else
@@ -44,7 +45,7 @@ class QuestionsController < ApplicationController
 			redirect_to new_session_path
 			return
 		elsif (@question.user == current_user)
-			if @question.update_attributes(params.require(:question).permit(:text))
+			if @question.update_attributes(params.require(:question).permit(:text, :units))
 				redirect_to questions_path
 			else
 				render :edit

@@ -8,7 +8,7 @@
 
 				<%= form_for [@question, @answer] do |f| %>
 					Date: <%= f.date_field :date, :class => "inputField inputDate" %><br>
-					Value: <%= f.number_field :value, :class => "inputField inputValue", placeholder: "Value" %><br>
+					Value: <%= f.number_field :value, :step => "any", :class => "inputField inputValue", placeholder: "Value" %><br>
 					Note: <%= f.text_field :note, :class => "inputField inputNote", placeholder: "Note" %>
 					<div class="buttonCenter" ><%= f.submit "Add", :class => 'inputButton' %>
 					</div>
