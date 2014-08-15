@@ -18,6 +18,7 @@ class SessionsController < ApplicationController
 				redirect_to questions_path
 			end
 		else
+			flash[:error] = "Invalid email and/or password"
 			redirect_to new_session_path
 		end
 	end

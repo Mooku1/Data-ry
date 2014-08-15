@@ -21,6 +21,16 @@
 
 		<h1>Log In</h1>
 
+		<% if flash[:error] %>
+			<div id="error_explanation">
+				<ul>
+					<% flash.each do | k, v | %>
+						<li><%= v %></li>
+					<% end %>
+				</ul>
+			</div>
+		<% end %>
+
 		<%= form_for @user, {url: session_path} do |f| %>
 			<%= f.text_field :email, :class =>'inputField', placeholder: "Email" %><br/>
 			<%= f.password_field :password, :class =>'inputField', placeholder: "Password" %>

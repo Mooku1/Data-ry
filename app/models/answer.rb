@@ -4,4 +4,9 @@ class Answer
   field :date, type: Date
   field :note, type: String
   belongs_to :question
+
+  validates :value, presence: true
+
+  validates :date, presence: true
+
 end

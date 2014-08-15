@@ -4,6 +4,17 @@
 
 	<div class="signUpInputContainer">
 
+		<% if @user.errors.any? %>
+			<div id="error_explanation">
+				<h3>Please fix the following <%= "error".pluralize(@user.errors.count) %> to sign up:</h3>
+				<ul>
+				<% @user.errors.full_messages.each do |msg| %>
+					<li><%= msg %></li>
+				<% end %>
+				</ul>
+			</div>
+		<% end %>
+
 		<%= form_for @user do |f| %>
 			<%= f.text_field :username, placeholder: "Name", :class => 'inputField' %><br />
 			<%= f.text_field :email, placeholder: "Email", :class => 'inputField' %><br />

@@ -22,8 +22,8 @@ class QuestionsController < ApplicationController
 	end
 	
 	def create
-		question = current_user.questions.new(params.require(:question).permit(:text, :units))
-		if question.save
+		@question = current_user.questions.new(params.require(:question).permit(:text, :units))
+		if @question.save
 			redirect_to questions_path
 		else
 			render :new

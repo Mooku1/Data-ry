@@ -7,4 +7,9 @@ class Question
   belongs_to :user
   
   has_many :answers
+
+  validates :text, presence: true
+
+  validates :units, presence: true
+  
 end

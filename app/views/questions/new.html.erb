@@ -1,13 +1,24 @@
 <div class="newQuestionContainer">
 
 	<h1>What question would you like to track?</h1>
+		
+		<% if @question.errors.any? %>
+			<div id="error_explanation">
+				<h3>Please fix the following <%= "error".pluralize(@question.errors.count) %> to add a new question:</h3>
+				<ul>
+					<% @question.errors.full_messages.each do |msg| %>
+						<li><%= msg.gsub("Text", "Question") %></li>
+					<% end %>
+				</ul>
+			</div>
+		<% end %>
+
 		<%= form_for @question do |f| %>
 			<div class="inputCenter">
-				<div>Question:  (i.e.
-				 How many hours of sleep did I get last night?)</div>
-				<%= f.text_field :text, placeholder: "Question", :class => "questionInputField" %>
-				<div>Units (i.e. hours, miles, hugs...):</div>
-				<%= f.text_field :units, placeholder: "Units" %>
+				<div>Question:</div>
+				<%= f.text_field :text, placeholder: "i.e. How many hours of sleep did I get last night?", :class => "questionInputField" %>
+				<div>Units:</div>
+				<%= f.text_field :units, placeholder: "(i.e. hours, miles, hugs...)", :class => "questionInputField" %>
 			</div>
 		  
 			<div class="buttonCenter">

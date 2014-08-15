@@ -9,6 +9,7 @@ $(document).on('ready page:load', function() {
 			//Specify the units in which the data is measured
 			var units = gon.units;
 
+			
 			// --- Maximum Data Point --- //
 
 			//Find the maximum value
@@ -23,6 +24,7 @@ $(document).on('ready page:load', function() {
 				}
 			}
 			
+
 			// --- Minimum Data Point --- //
 			
 			//Find the last date in which the min
@@ -220,10 +222,10 @@ $(document).on('ready page:load', function() {
 			var monthArray = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 			
 			//Create a string of our maximum data point date
-			var maxDateString = convertDate(maximumDataPoint.date).getDay() + " " + monthArray[convertDate(maximumDataPoint.date).getMonth()] + " " + convertDate(maximumDataPoint.date).getFullYear();
-
+			var maxDateString = convertDate(maximumDataPoint.date).getDate() + " " + monthArray[convertDate(maximumDataPoint.date).getMonth()] + " " + convertDate(maximumDataPoint.date).getFullYear();
+		
 			//Create a string of our maximum data point date
-			var minDateString = convertDate(minimumDataPoint.date).getDay() + " " + monthArray[convertDate(minimumDataPoint.date).getMonth()] + " " + convertDate(minimumDataPoint.date).getFullYear();
+			var minDateString = convertDate(minimumDataPoint.date).getDate() + " " + monthArray[convertDate(minimumDataPoint.date).getMonth()] + " " + convertDate(minimumDataPoint.date).getFullYear();
 
 			document.getElementById("maxValue").innerHTML = maximumValue;
 			document.getElementById("maxValueDate").innerHTML = maxDateString;
