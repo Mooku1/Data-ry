@@ -1,6 +1,66 @@
 <div class="showContainer">
 
-	<h1><%= @question.text %></h1>
+	<!-- Div for most recent data -->
+
+	<div class="questionTitleDiv">
+		<h1><%= @question.text %></h1>
+
+		<div class="mostRecentDataDiv">
+			<% if @today_answer %>
+				<div class="row">
+				
+					<div class="col-sm-6">
+						<div id="mostRecent">
+							<div class="mostRecentData"><%= @today_answer %></div>
+							<div class="mostRecentUnits"><%= @question.units %></div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div id="averageGraph"></div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12">
+						<!-- In the JavaScript, there is a function called latestToAvg that creates a string to go in here. -->
+						<!-- That string will say "Your latest value of [value] was [amount difference] [greater than/less than/equal to] your average value of [average value]" -->
+						<div id="averageData">
+							Your latest score of <span id="latestDataValue">
+							</span> was <span id="avgDifference"></span> your average of
+							<span id ="dataAvg">
+							</span>.
+						</div>
+					</div>
+				</div>
+			<% elsif @yesterday_answer %>
+				<div class="row">
+				
+					<div class="col-sm-6">
+						<div id="mostRecent">
+							<div class="mostRecentData"><%= @today_answer %></div>
+							<div class="mostRecentUnits"><%= @question.units %></div>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div id="averageGraph"></div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12">
+						<!-- In the JavaScript, there is a function called latestToAvg that creates a string to go in here. -->
+						<!-- That string will say "Your latest value of [value] was [amount difference] [greater than/less than/equal to] your average value of [average value]" -->
+						<div id="averageData">
+							Your latest score of <span id="latestDataValue">
+							</span> was <span id="avgDifference"></span> your average of
+							<span id ="dataAvg">
+							</span>.
+						</div>
+					</div>
+				</div>
+			<% else %>
+				<div class="col-sm-12"><%= link_to "Please input data for yesterday or today", new_question_answer_path(@question.id) %></div>
+			<% end %>
+			</div>
+		</div>
 
 	<div class="dashboardContainer">
 

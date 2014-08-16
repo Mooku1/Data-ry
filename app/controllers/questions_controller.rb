@@ -11,6 +11,11 @@ class QuestionsController < ApplicationController
 		@answers = @question.answers.sort_by &:date
 		gon.watch.question_json = @answers
 		gon.watch.units = @question.units
+		if @answers.last.date == Date.today
+			@today_answer = @answers.last.value
+		elsif @answers.last.date == Date.today.advance(:days => -1)
+			@yesterday_answer = @answers.last.value
+		end
 		if (!current_user) || (@question.user != current_user)
 			redirect_to new_session_path
 			return

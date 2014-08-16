@@ -19,11 +19,15 @@ html{
 	height: 100%;
 }
 
+
+/* -------- App-wide Styles -------- */
+
 #navBar{
 	margin: 0;
 	border-radius: 0;
 	background-color: rgba(255,255,255,0);
-	padding: 20px 0;
+	padding: 5px 0;
+	border-bottom: 1px solid black;
 }
 
 #menuToggle{
@@ -100,14 +104,14 @@ html{
 	color: rgb(183,1,0);
 
 	ul{
-			padding: 10px 0;
+		padding: 10px 0;
 
-			li{
-				font-size: 18px;
-				list-style-type: none;
-			}
-
+		li{
+			font-size: 18px;
+			list-style-type: none;
 		}
+
+	}
 }
 
 .field_with_errors{
@@ -115,5 +119,134 @@ html{
 
 	.inputField{
 		border: 2px solid rgba(183,1,0,1);
+	}
+}
+
+
+/* -------- Questions Styles -------- */
+
+
+/* ---- Add New Question ---- */
+
+.newQuestionContainer{
+	width: 70%;
+	margin: 0 auto;
+	padding: 20px;
+	background-color: white;
+	color: rgba(81,81,81,1);
+	border-radius: 10px;
+	font-size: 20px;
+
+	.inputCenter{
+		width: 90%;
+		margin: 0 auto;
+	}
+
+	.questionInputField{
+		padding: 10px;
+		margin: 10px 0;
+		width: 100%;
+		height: 50px;
+		-webkit-border-radius: 6px;
+		-moz-border-radius: 6px;
+		border: 1px solid rgba(130,130,130,1);
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+	}
+}
+
+
+/* ---- Show Question ---- */
+
+.showContainer{
+	font-size: 18px;
+	background-color: white;
+	color: rgba(81,81,81,1);
+	border-radius: 10px;
+	width: 100%;
+	margin: 0 auto 50px;
+
+	.questionTitleDiv{
+		background-color: rgb(203,232,107);
+		padding: 40px;
+
+		h1{
+			font-size: 50px;
+			margin: 0 auto;
+		}
+
+		.mostRecentDataDiv{
+			margin: 0 auto;
+
+			div{
+			}
+
+			#mostRecent{
+				padding: 60px 0;
+				margin: 60px auto;
+				width: 250px;
+				height: 250px;
+				border-radius: 50%;
+				background-color: rgb(28,20,13);
+				color: white;
+				text-align: center;
+
+				.mostRecentData{
+					font-size: 80px;
+					line-height: 1em;
+				}
+
+				.mostRecentUnits{
+					font-size: 40px;
+				}
+			}
+
+			#averageGraph{
+				margin: 60px auto;
+				width: 200px;
+				height: 250px;
+			}
+
+			#averageData{
+				width: 80%;
+				margin: 20px auto;
+				font-size: 26px;
+				text-align: center;
+			}
+		}
+	}
+
+	table{
+		width: 90%;
+		margin: 60px auto;
+
+		.colRight{
+			text-align: right
+		}
+	}
+
+	ul{
+		margin: 0 auto;
+		width: 80%;
+
+		li{
+			font-size: 24px;
+			padding: 10px;
+
+			.questionViewLink{
+				font-size: 18px;
+			}
+		}
+	}
+
+	.dashboardContainer{
+		width: 90%;
+
+		#questionGraph{
+				width: 400px;
+				height: 300px;
+				margin: 0 auto;
+		}
 	}
 }
