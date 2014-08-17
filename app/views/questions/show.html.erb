@@ -1,3 +1,6 @@
+<%= include_gon %>
+  
+
 <div class="showContainer">
 
 	<!-- Div for most recent data -->
@@ -36,7 +39,7 @@
 				
 					<div class="col-sm-6">
 						<div id="mostRecent">
-							<div class="mostRecentData"><%= @today_answer %></div>
+							<div class="mostRecentData"><%= @yesterday_answer %></div>
 							<div class="mostRecentUnits"><%= @question.units %></div>
 						</div>
 					</div>
