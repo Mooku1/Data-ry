@@ -167,14 +167,19 @@ html{
 	width: 100%;
 	margin: 0 auto 50px;
 
+	h1{
+		font-size: 50px;
+		margin: 0 auto;
+	}
+
+	h2{
+		font-size: 36px;
+		text-align: center;
+	}
+
 	.questionTitleDiv{
 		background-color: rgb(203,232,107);
 		padding: 40px;
-
-		h1{
-			font-size: 50px;
-			margin: 0 auto;
-		}
 
 		.mostRecentDataDiv{
 			margin: 0 auto;
@@ -236,6 +241,31 @@ html{
 
 			.questionViewLink{
 				font-size: 18px;
+			}
+		}
+	}
+
+	.highLowContainer{
+		font-size: 18px;
+		padding: 40px;
+
+		.highLowRows{
+			width: 90%;
+			height: 400px;
+			margin: 100px auto;
+			text-align: center;
+
+			.highLowCol{
+				height: 300px;
+
+				.dataValue{
+					margin: 10px auto;
+					font-size: 30px;
+				}
+
+				.highLowCircle{
+					margin: 30px auto;
+				}
 			}
 		}
 	}

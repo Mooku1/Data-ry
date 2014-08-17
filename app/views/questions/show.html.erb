@@ -65,23 +65,111 @@
 			</div>
 		</div>
 
+	<!-- Div for highest and lowest data values -->
+
+	<div class="highLowContainer">
+
+		<h2>How does it compare to your highs and lows?</h2>
+
+	
+		<div class="highLowRows">
+			
+
+			<div class="row">
+				
+				<!-- Low Data Point Column -->
+
+				<div class="highLowCol col-sm-4">
+					Lowest Data Point
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="dataValue">
+								<div id="minValue"></div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="highLowCircle" id="lowCircle"></div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12">
+									last achieved on:<br>
+									<div id="minValueDate">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Latest Data Point Column -->
+
+				<div class="highLowCol col-sm-4">
+					Most Recent Data Point
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="dataValue">
+								<div id="mostRecentValue"></div
+							</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="highLowCircle" id="latestCircle"></div>
+								</div>
+								<div class="row">
+									<div class="col-sm-12">
+										achieved on:<br/>
+										<div id="mostRecentDate"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Highest Data Point Column -->
+
+				<div class="highLowCol col-sm-4">
+					Highest Data Point
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="dataValue">
+								<div id="maxValue"></div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="highLowCircle" id="highCircle"></div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12">
+								last achieved on:<br>
+									<div id="maxValueDate">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Div for past week data -->
+
 	<div class="dashboardContainer">
 
 		<div class="row">
 			<div class="col-lg-4">
 				<div id="maximumDataPoint">
 					Highest Value Achieved:
-					<div id="maxValue"></div>
-					last achieved on:
-					<div id="maxValueDate">
-					</div>
+					
+					
 				</div>
 				<div id="minimumDataPoint">
 					Lowest Value Achieved:
-					<div id="minValue"></div>
 					last achieved on:
-					<div id="minValueDate">
-					</div>
+					
 				</div>
 			</div>
 			<div class="col-lg-8">

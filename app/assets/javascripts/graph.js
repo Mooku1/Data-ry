@@ -114,12 +114,15 @@ $(document).on('ready page:load', function() {
 
 			averageGraph = function(){
 
+				//Graph data
 				var aData = [mostRecentValue, dataAvg];  //the only two values in our data set are the most recent value and the average of all values
 
+				//Graph dimensions
 				var w = document.getElementById("averageGraph").offsetWidth;
 				var h = document.getElementById("averageGraph").offsetHeight;
 				var padding = 140;
 
+				//set x and y scales
 				var xScale = d3.scale.linear()
 							.domain([0, d3.max(aData, function(d){
 								return d
@@ -130,11 +133,13 @@ $(document).on('ready page:load', function() {
 							.domain([0, 2])  //there will only be two data values displayed
 							.range([0, h]);
 
+				//draw the SVG
 				var svg = d3.select("#averageGraph")
 						.append("svg")
 						.attr("width", w)
 						.attr("height", h);
 
+				//append the graph data
 				svg.selectAll("rect")
 						.data(aData)
 						.enter()
@@ -196,7 +201,7 @@ $(document).on('ready page:load', function() {
 							//center the text
 							.attr("dx", w/2)
 							.attr("text-anchor", "middle")
-							
+
 							.attr("dy", h/2 + padding/2.5)
 							.attr("font-size", "24px");
 
@@ -205,8 +210,6 @@ $(document).on('ready page:load', function() {
 
 
 			averageGraph();
-			
-
 			// --- Latest to Average String Function --- //
 
 			
@@ -232,6 +235,112 @@ $(document).on('ready page:load', function() {
 
 			latestToAvg();
 
+
+	// ------ High and Low Graph ------ //
+
+			var highLowGraph = function(divId, dataPoint){
+
+				//Feed the targeted div ID in as an argument in string form
+				//so it knows where to populate the graph.
+				//Feed in whether it is a minimum or maximum value so it knows
+				//which data point to utilize
+
+				//dataPoint = min, max, or latest
+
+				//Data
+				//Set by the argument dataPoint
+				if (dataPoint == "min"){
+					var hData = minimumValue;
+				}
+				else if (dataPoint == "latest"){
+					var hData = mostRecentValue;
+				}
+				else if (dataPoint == "max"){
+					var hData = maximumValue;
+				};
+
+				// --- Dimensions of the Graph --- //
+				var w = 100;
+				var h = 100;
+
+				var stroke = 1;
+
+				// --- Scale --- //
+
+				//set up the scale to represent high and low
+				//note: we do not need X and Y scales because it is a circle
+				var scale = d3.scale.linear()
+							.domain([Math.sqrt(minimumValue), Math.sqrt(maximumValue)])
+							.range([10, w/2]);
+
+				// --- Draw the SVG Element --- //
+
+				var svg = d3.selectAll(divId)
+						.append("svg")
+						.attr("width", w)
+						.attr("height", h);
+
+
+				// --- Append Data to the Graph --- //
+
+				svg.append("circle")
+						
+						// The animation
+						.transition()  //begin the animation
+						.duration(500)  //set the duration of the animation
+						.each("start", function(){ //specifies the starting attributes of the animation
+							d3.select(this)
+								
+								//center the circle within svg
+								.attr("cx", w/2)
+								.attr("cy", h/2)
+
+								.attr("r", 0)
+								.style("fill", "rgb(203,232,107)")
+								.style("stroke", "rgb(100,100,100)")
+								.style("stroke-width", "1px")
+
+						})
+						
+						//Set the radius 
+						.attr("r", scale(Math.sqrt(hData))-(stroke*2));
+
+				//append another small circle to mark the center
+				svg.append("circle")
+						.attr("cx", w/2)
+						.attr("cy", h/2)
+						.attr("r", 1)
+						.style("fill", "rgb(100,100,100)");
+
+			};
+
+			//call the functions to build each circle (low, latest, high)
+			highLowGraph("#lowCircle", "min");
+			highLowGraph("#latestCircle", "latest");
+			highLowGraph("#highCircle", "max");
+
+
+			//Create a string of our maximum data point date
+			var maxDateString = dateString(convertDate(maximumDataPoint.date));
+
+			//Create a string for most recent data point date
+
+			var mostRecentDateString = dateString(convertDate(data[data.length-1].date));
+		
+			//Create a string of our maximum data point date
+			var minDateString = dateString(convertDate(minimumDataPoint.date));
+
+			document.getElementById("maxValue").innerHTML = maximumValue + " " + units;
+			document.getElementById("maxValueDate").innerHTML = maxDateString;
+
+			document.getElementById("mostRecentValue").innerHTML = mostRecentValue + " " + units;
+			document.getElementById("mostRecentDate").innerHTML = mostRecentDateString;
+
+
+			document.getElementById("minValue").innerHTML = minimumValue + " " + units;
+			document.getElementById("minValueDate").innerHTML = minDateString;
+
+
 	// ------ History Graph ------ //
 
 			// --- Dimensions of the Graph --- //
@@ -245,7 +354,7 @@ $(document).on('ready page:load', function() {
 			var topPadding = 20;
 
 
-			// --- Populate the Graph --- //
+			// --- Scales and Axes --- //
 
 			//Set up the x scale so that it includes the days we want it to include
 			var xScale = d3.time.scale()
@@ -323,9 +432,6 @@ $(document).on('ready page:load', function() {
 							return yScale(0) - yScale(d.value);
 						})
 
-						//Set the fill color of the bars
-						.attr("fill", "rgb(168,219,168)");
-
 			//Append the axes
 			svg.append("g")
 				.attr("class", "axis")
@@ -354,17 +460,7 @@ $(document).on('ready page:load', function() {
 			//In order to get JavaScript month names, we need to set an array
 			//of month names.
 			
-			//Create a string of our maximum data point date
-			var maxDateString = dateString(convertDate(maximumDataPoint.date));
-		
-			//Create a string of our maximum data point date
-			var minDateString = dateString(convertDate(minimumDataPoint.date));
-
-			document.getElementById("maxValue").innerHTML = maximumValue;
-			document.getElementById("maxValueDate").innerHTML = maxDateString;
-
-			document.getElementById("minValue").innerHTML = minimumValue;
-			document.getElementById("minValueDate").innerHTML = minDateString
+			
 
 
 			//Show most recent data value
