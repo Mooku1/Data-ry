@@ -11,7 +11,7 @@ class QuestionsController < ApplicationController
 		@answers = @question.answers.sort_by &:date
 		gon.watch.question_json = @answers
 		gon.watch.units = @question.units
-		if @answers.length > 1
+		if @answers.length > 0
 			if @answers.last.date == Date.today
 				@today_answer = @answers.last.value
 			elsif @answers.last.date == Date.today.advance(:days => -1)

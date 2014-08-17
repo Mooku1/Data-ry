@@ -72,7 +72,15 @@ $(document).on('ready page:load', function() {
 						date.substr(8,2));
 			};
 
-			
+	// ------ Convert Dates to Strings ------ //
+	//We can convert dates, but now we must also be able to convert them to strings in the 
+	//format of our choosing.
+
+			var dateString = function(date){
+				var monthArray = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+				return date.getDate() + " " + monthArray[date.getMonth()] + " " + date.getFullYear();
+			};
 			
 
 	// ------ Count Total Days ------ //
@@ -110,17 +118,17 @@ $(document).on('ready page:load', function() {
 
 				var w = document.getElementById("averageGraph").offsetWidth;
 				var h = document.getElementById("averageGraph").offsetHeight;
-				var padding = 20;
+				var padding = 140;
 
 				var xScale = d3.scale.linear()
-							.domain([0, 2])  //there will only be two data values displayed
-							.range([0, w]);
-
-				var yScale = d3.scale.linear()
 							.domain([0, d3.max(aData, function(d){
 								return d
 							})]) //the domain is 0 to the max between the most recent value and the average of all values
-							.range([10, h]);
+							.range([10, w]);
+
+				var yScale = d3.scale.linear()
+							.domain([0, 2])  //there will only be two data values displayed
+							.range([0, h]);
 
 				var svg = d3.select("#averageGraph")
 						.append("svg")
@@ -135,33 +143,63 @@ $(document).on('ready page:load', function() {
 						// The animation
 						.transition()  //begin the animation
 						.duration(1000)  //set the duration of the animation
-						.each("start", function(){ //specifies the starting attributes of the animation
+						.each("start", function(d, i){ //specifies the starting attributes of the animation
 							d3.select(this)
-								.attr("y", h)
-								.attr("height", 0)
-								.attr("fill", "rgb(242,233,225)")
+								//Set starting x position of each bar of the bar graph
+								.attr("x", function(d){
+									return w/2
+								})
+								.attr("width", 0)
+								
+								//set the fill color
+								.attr("fill", function(){
+									if (i == 0){
+										return "rgb(242,233,225)"
+									}
+									else{
+										return "rgb(28,20,13)"
+									}
+								})
 						})
 						
-						//Set starting x position of each bar of the bar graph
-						.attr("x", function(d, i) {
-							return i * w/aData.length; //Starting position depends on the number of days between first and last
+						.attr("x", function(d){
+									return w/2 - (xScale(d)/2)
 						})
-						
+
 						//Set the starting y position of each bar
-						.attr("y", function(d) {
-							return h - yScale(d);  //Starting y position needs to be set to the height of the svg element minus the height of the bar 
+						.attr("y", function(d, i) {
+							return (padding/2) + (i * h/aData.length); //Starting position depends on the number of days between first and last
 						})
 
 						//Set the width of each bar
-						.attr("width", w/aData.length - padding)  //Make the width of each bar by dividing them evenly from the width of the svg element and subtracting the padding between each bar
+						.attr("height", h/aData.length - (padding/2))  //Make the width of each bar by dividing them evenly from the width of the svg element and subtracting the padding between each bar
 						
 						//Set the height of each bar
-						.attr("height", function(d) {
-							return yScale(d);
-						})
+						.attr("width", function(d) {
+							return xScale(d);
+						});
 
-						//Set the fill color of the bars
-						.attr("fill", "rgb(242,233,225)");
+						//Add labels
+						svg.append("text")
+							.text(dateString(convertDate(data[data.length-1].date)))
+							
+							//center the text
+							.attr("dx", w/2)
+							.attr("text-anchor", "middle")
+
+							.attr("dy", padding/2.5)
+							.attr("font-size", "24px");
+
+						svg.append("text")
+							.text("Average")
+
+							//center the text
+							.attr("dx", w/2)
+							.attr("text-anchor", "middle")
+							
+							.attr("dy", h/2 + padding/2.5)
+							.attr("font-size", "24px");
+
 
 			};
 
@@ -315,14 +353,12 @@ $(document).on('ready page:load', function() {
 
 			//In order to get JavaScript month names, we need to set an array
 			//of month names.
-
-			var monthArray = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 			
 			//Create a string of our maximum data point date
-			var maxDateString = convertDate(maximumDataPoint.date).getDate() + " " + monthArray[convertDate(maximumDataPoint.date).getMonth()] + " " + convertDate(maximumDataPoint.date).getFullYear();
+			var maxDateString = dateString(convertDate(maximumDataPoint.date));
 		
 			//Create a string of our maximum data point date
-			var minDateString = convertDate(minimumDataPoint.date).getDate() + " " + monthArray[convertDate(minimumDataPoint.date).getMonth()] + " " + convertDate(minimumDataPoint.date).getFullYear();
+			var minDateString = dateString(convertDate(minimumDataPoint.date));
 
 			document.getElementById("maxValue").innerHTML = maximumValue;
 			document.getElementById("maxValueDate").innerHTML = maxDateString;
