@@ -169,7 +169,7 @@ html{
 
 	h1{
 		font-size: 50px;
-		margin: 0 auto;
+		text-align: center;
 	}
 
 	h2{
@@ -178,49 +178,54 @@ html{
 	}
 
 	.questionTitleDiv{
-		background-color: rgb(203,232,107);
+		padding: 10px;
+		background-color: rgb(28,20,13);
+		color: white;
+	}
+
+	.mostRecentDataDiv{
+		margin: 0 auto;
 		padding: 40px;
+		background-color: rgb(203,232,107);
+		
 
-		.mostRecentDataDiv{
-			margin: 0 auto;
+		div{
+		}
 
-			div{
+		#mostRecent{
+			padding: 60px 0;
+			margin: 60px auto;
+			width: 250px;
+			height: 250px;
+			border-radius: 50%;
+			background-color: rgb(28,20,13);
+			color: white;
+			text-align: center;
+
+			.mostRecentData{
+				font-size: 80px;
+				line-height: 1em;
 			}
 
-			#mostRecent{
-				padding: 60px 0;
-				margin: 60px auto;
-				width: 250px;
-				height: 250px;
-				border-radius: 50%;
-				background-color: rgb(28,20,13);
-				color: white;
-				text-align: center;
-
-				.mostRecentData{
-					font-size: 80px;
-					line-height: 1em;
-				}
-
-				.mostRecentUnits{
-					font-size: 40px;
-				}
-			}
-
-			#averageGraph{
-				margin: 60px auto 40px;
-				width: 280px;
-				height: 220px;
-			}
-
-			#averageData{
-				width: 80%;
-				margin: 20px auto;
-				font-size: 26px;
-				text-align: center;
+			.mostRecentUnits{
+				font-size: 40px;
 			}
 		}
+
+		#averageGraph{
+			margin: 60px auto 40px;
+			width: 280px;
+			height: 220px;
+		}
+
+		#averageData{
+			width: 80%;
+			margin: 20px auto;
+			font-size: 26px;
+			text-align: center;
+		}
 	}
+
 
 	table{
 		width: 90%;
@@ -247,16 +252,18 @@ html{
 
 	.highLowContainer{
 		font-size: 18px;
-		padding: 40px;
+		padding: 40px 0;
+		border-top: 1px solid black;
+		background-color: white;
 
 		.highLowRows{
 			width: 90%;
-			height: 400px;
-			margin: 100px auto;
+			margin: 0 auto;
 			text-align: center;
 
 			.highLowCol{
 				height: 300px;
+				margin: 70px auto 26px;
 
 				.dataValue{
 					margin: 10px auto;
@@ -266,17 +273,29 @@ html{
 				.highLowCircle{
 					margin: 30px auto;
 				}
+
+				.bottomRow{
+					border-bottom: 1px solid black;	
+					padding: 0 0 60px;
+				}
 			}
 		}
 	}
 
-	.dashboardContainer{
-		width: 90%;
+	.twoWeekContainer{
+		width: 100%;
+		background-color: rgb(203,232,107);
+		padding: 40px 0;
+		border-bottom: 1px solid black;
 
-		#questionGraph{
-				width: 400px;
-				height: 300px;
-				margin: 0 auto;
+		.twoWeekGraphContainer{
+			padding: 60px 0;
+
+			#twoWeekGraph{
+					width: 330px;
+					height: 300px;
+					margin: 0 auto;
+			}
 		}
 	}
 }

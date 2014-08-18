@@ -3,12 +3,19 @@
 
 <div class="showContainer">
 
-	<!-- Div for most recent data -->
+	<!-- Title -->
 
 	<div class="questionTitleDiv">
 		<h1><%= @question.text %></h1>
 
+	</div>
+
+	<!-- Most recent data div -->
+
 		<div class="mostRecentDataDiv">
+			
+			<h2>Most Recent Data</h2>
+
 			<% if @today_answer %>
 				<div class="row">
 				
@@ -63,13 +70,12 @@
 				<div class="col-sm-12"><%= link_to "Please input data for yesterday or today", new_question_answer_path(@question.id) %></div>
 			<% end %>
 			</div>
-		</div>
 
 	<!-- Div for highest and lowest data values -->
 
 	<div class="highLowContainer">
 
-		<h2>How does it compare to your highs and lows?</h2>
+		<h2>Highs and Lows</h2>
 
 	
 		<div class="highLowRows">
@@ -91,7 +97,7 @@
 							<div class="col-sm-12">
 								<div class="highLowCircle" id="lowCircle"></div>
 							</div>
-							<div class="row">
+							<div class="bottomRow row">
 								<div class="col-sm-12">
 									last achieved on:<br>
 									<div id="minValueDate">
@@ -116,7 +122,7 @@
 								<div class="col-sm-12">
 									<div class="highLowCircle" id="latestCircle"></div>
 								</div>
-								<div class="row">
+								<div class="bottomRow row">
 									<div class="col-sm-12">
 										achieved on:<br/>
 										<div id="mostRecentDate"></div>
@@ -141,7 +147,7 @@
 							<div class="col-sm-12">
 								<div class="highLowCircle" id="highCircle"></div>
 							</div>
-							<div class="row">
+							<div class="bottomRow row">
 								<div class="col-sm-12">
 								last achieved on:<br>
 									<div id="maxValueDate">
@@ -157,28 +163,19 @@
 
 	<!-- Div for past week data -->
 
-	<div class="dashboardContainer">
+	<div class="twoWeekContainer">
 
-		<div class="row">
-			<div class="col-lg-4">
-				<div id="maximumDataPoint">
-					Highest Value Achieved:
-					
-					
-				</div>
-				<div id="minimumDataPoint">
-					Lowest Value Achieved:
-					last achieved on:
-					
-				</div>
-			</div>
-			<div class="col-lg-8">
-		  		<div id="questionGraph">
+		<h2>Previous Two Weeks</h2>
 
-				</div>
+		<div class="twoWeekGraphContainer">
+			<div id="twoWeekGraph">
+
 			</div>
 		</div>
+
 	</div>
+
+	<!-- Data Table Div -->
 
 	<table class="table">
 		<col width="20%">
