@@ -319,11 +319,6 @@ $(document).on('ready page:load', function() {
 
 			};
 
-			//call the functions to build each circle (low, latest, high)
-			highLowGraph("#lowCircle", "min");
-			highLowGraph("#latestCircle", "latest");
-			highLowGraph("#highCircle", "max");
-
 
 			//Create a string of our maximum data point date
 			var maxDateString = dateString(convertDate(maximumDataPoint.date));
@@ -480,17 +475,36 @@ $(document).on('ready page:load', function() {
 
 			};
 
-			twoWeekGraph();
-
-
-
-	// ------ Populate Data in the Dashboard ------ //
-
-			
 			
 
 
-			//Show most recent data value
+	// ------ Build the graphs on scroll events ------ //
+
+			//Call the functions to build each circle (low, latest, high)
+			//Cal; the function to build the two week graph
+			//Fire the builds on scroll over
+				var highLowComplete = false;
+				var highLowElement = document.getElementById("highLowContainer");
+				var highLowComplete = false;
+
+				var twoWeekElement = document.getElementById("twoWeekGraph");
+				var twoWeekComplete = false;
+				
+				window.onscroll = function(){
+					if (window.pageYOffset > highLowElement.offsetTop - 450 && highLowComplete == false){
+						highLowGraph("#lowCircle", "min");
+						highLowGraph("#latestCircle", "latest");
+						highLowGraph("#highCircle", "max");
+
+						highLowComplete = true;
+					}
+					if (window.pageYOffset > twoWeekElement.offsetTop - 650 && twoWeekComplete == false){
+						twoWeekGraph();
+
+						twoWeekComplete = true;
+					}
+				}
+
 
 
 });
