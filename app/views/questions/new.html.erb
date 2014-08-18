@@ -1,7 +1,11 @@
 <div class="newQuestionContainer">
 
-	<h1>What question would you like to track?</h1>
+	<div class="questionTitle">
+		<h1>What question would you like to track?</h1>
+	</div>
 		
+	<div class="formContainer newQuestionForm">
+
 		<% if @question.errors.any? %>
 			<div id="error_explanation">
 				<h3>Please fix the following <%= "error".pluralize(@question.errors.count) %> to add a new question:</h3>
@@ -27,10 +31,12 @@
 
 		<% end %>
 
-		<div class="linkActions">
+	</div>
 
-			<%= link_to "Cancel", questions_path(@question.id) %>
+	<div class="linkActions">
 
-		</div>
+		<%= link_to "Cancel", questions_path(@question.id) %>
+
+	</div>
 
 </div>

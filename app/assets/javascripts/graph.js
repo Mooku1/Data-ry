@@ -92,8 +92,10 @@ $(document).on('ready page:load', function() {
 
 			//Find number of days between first and last days
 			var dayToMs = 1000 * 60 * 60 * 24;  //Convert days to milliseconds
-			var totalDays = Math.round(Math.abs(lastDate.getTime() - firstDate.getTime())/dayToMs) + 1;
 			
+			var totalDays = function(data){
+				return Math.round(Math.abs(convertDate(data[data.length-1].date).getTime() - convertDate(data[0].date).getTime())/dayToMs) + 1;
+			};
 
 			
 
@@ -105,7 +107,7 @@ $(document).on('ready page:load', function() {
 			var countTicks = function(data, steps){  //data is the data to pass through, steps indicate intervals
 				var dateTicks = [];
 				var day_to_ms = 1000 * 60 * 60 * 24;
-					for (i = 0; i <= data.length; ++i){
+					for (i = 0; i < totalDays(data); ++i){
 						if (i%steps == 0){  //Find out if the day is an even amount of days away from first date
 							dateTicks.push(d3.time.day.offset(convertDate(data[0].date), i))  //If it is, push the date into the ticks array
 						}
@@ -362,7 +364,6 @@ $(document).on('ready page:load', function() {
 						twoWeekData.push(data[i])
 					}
 				};
-				console.log(twoWeekData);
 
 				// --- Dimensions of the Graph --- //
 
@@ -446,7 +447,7 @@ $(document).on('ready page:load', function() {
 							})
 
 							//Set the width of each bar
-							.attr("width", w/(totalDays + 1) - padding)  //Make the width of each bar by dividing them evenly from the width of the svg element and subtracting the padding between each bar
+							.attr("width", w/(totalDays(twoWeekData) + 1) - padding)  //Make the width of each bar by dividing them evenly from the width of the svg element and subtracting the padding between each bar
 							
 							//Set the height of each bar
 							.attr("height", function(d) {
@@ -454,25 +455,28 @@ $(document).on('ready page:load', function() {
 							})
 
 				//Append the axes
+
+				//x axis
 				svg.append("g")
 					.attr("class", "axis")
 					.attr("transform", "translate(0," + (h - bottomPadding) + ")")
 					.call(xAxis)
 					.selectAll("text")
-						.attr("font-size", 14)
-						.attr("dx", (totalDays < 10 ? ((w/(totalDays + 1))/2 ) : -25) + "px")
-						.attr("dy", (totalDays < 10 ? "10px" : "0"))
+						.attr("font-size", 12)
+						.attr("dx", (totalDays(twoWeekData) < 10 ? ((w/(totalDays(twoWeekData) + 1))/2 - 3 ) : -25) + "px")
+						.attr("dy", (totalDays(twoWeekData) < 10 ? "10px" : "0"))
 						.attr("transform", function(){
-							return "rotate("+(totalDays < 10 ? 0 : -90)+")"
+							return "rotate("+(totalDays(twoWeekData) < 10 ? 0 : -90)+")"
 						});
 
+				//y axis
 				svg.append("g")
 					.attr("class", "axis")
 					.attr("transform", "translate("+(padding+leftPadding)+",0)")
 					.call(yAxis)
 					.selectAll("text")
 						.attr("dx", 20)
-						.attr("font-size", 14);
+						.attr("font-size", 12);
 
 			};
 

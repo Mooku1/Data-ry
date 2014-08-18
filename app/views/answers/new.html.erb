@@ -20,21 +20,22 @@
 
 				<%= form_for [@question, @answer] do |f| %>
 					Date: <%= f.date_field :date, :class => "inputField inputDate" %><br>
-					Value: <%= f.number_field :value, :step => "any", :class => "inputField inputValue", placeholder: "Value" %><br>
+					Value: <%= f.number_field :value, :step => "any", :class => "inputField inputValue", placeholder: "Value" %><br><br>
 					Note: <%= f.text_field :note, :class => "inputField inputNote", placeholder: "Note" %>
 					<div class="buttonCenter" ><%= f.submit "Add", :class => 'inputButton' %>
 					</div>
 
 				<% end %>
 
-				<div class="linkActions">
-
-					<%= link_to "Cancel", question_path(@question) %>
-					<%= link_to "Delete", question_answer_path(@question.id, @answer.id), method: :delete, data: {confirm: 'Are you sure you want to delete this data point?'} %>
-
-			</div>
+				
 
 		</div>
+
+	</div>
+
+	<div class="linkActions">
+
+		<%= link_to "Cancel", question_path(@question) %>
 
 	</div>
 

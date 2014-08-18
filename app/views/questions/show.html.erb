@@ -12,16 +12,17 @@
 
 	<!-- Most recent data div -->
 
+	<% if @answers.length > 1 %>
+
 		<div class="mostRecentDataDiv">
 			
 			<h2>Most Recent Data</h2>
 
-			<% if @today_answer %>
 				<div class="row">
 				
 					<div class="col-sm-6">
 						<div id="mostRecent">
-							<div class="mostRecentData"><%= @today_answer %></div>
+							<div class="mostRecentData"><%= @recent_answer %></div>
 							<div class="mostRecentUnits"><%= @question.units %></div>
 						</div>
 					</div>
@@ -41,34 +42,7 @@
 						</div>
 					</div>
 				</div>
-			<% elsif @yesterday_answer %>
-				<div class="row">
-				
-					<div class="col-sm-6">
-						<div id="mostRecent">
-							<div class="mostRecentData"><%= @yesterday_answer %></div>
-							<div class="mostRecentUnits"><%= @question.units %></div>
-						</div>
-					</div>
-					<div class="col-sm-6">
-						<div id="averageGraph"></div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-12">
-						<!-- In the JavaScript, there is a function called latestToAvg that creates a string to go in here. -->
-						<!-- That string will say "Your latest value of [value] was [amount difference] [greater than/less than/equal to] your average value of [average value]" -->
-						<div id="averageData">
-							Your latest score of <span id="latestDataValue">
-							</span> was <span id="avgDifference"></span> your average of
-							<span id ="dataAvg">
-							</span>.
-						</div>
-					</div>
-				</div>
-			<% else %>
-				<div class="col-sm-12"><%= link_to "Please input data for yesterday or today", new_question_answer_path(@question.id) %></div>
-			<% end %>
+			
 			</div>
 
 	<!-- Div for highest and lowest data values -->
@@ -175,32 +149,20 @@
 
 	</div>
 
-	<!-- Data Table Div -->
 
-	<table class="table">
-		<col width="20%">
-		<col width="20%">
-		<col width="40%">
-		<col width="20%">
-		<th> Date</th>
-		<th>Value</th>
-		<th>Note</th>
-		<th class="colRight">Action</th>
-		<% @answers.each do |a| %>
-			<tr>
-				<td><%= a.date %></td>
-				<td><%= a.value %></td>
-				<td><%= a.note %></td>
-				<td align="right">
-					<%= link_to "Edit", edit_question_answer_path(@question.id, a.id) %>
-					<%= link_to "Delete", question_answer_path(@question.id, a.id), method: :delete, data: {confirm: 'Are you sure you want to delete this data point?'} %></td>
-			</tr>
-		<% end %>
-	</table>
+	<!-- If there is no recent data, notify user -->
+
+	<% else %>
+		<div class="missingData">
+			<div class="col-sm-12"><%= link_to "Add Data to Get Started", new_question_answer_path(@question.id) %></div>
+		</div>
+	<% end %>
 
 	<div class="linkActions">
 
 		<%= link_to "Add a data point", new_question_answer_path(@question.id) %>
+
+		<%= link_to "Edit Question", edit_question_path(@question.id) %>
 
 		<%= link_to "Delete Question", :question, method: :delete, data: {confirm: 'Are you sure you want to delete this question?'} %>
 

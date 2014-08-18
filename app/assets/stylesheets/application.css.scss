@@ -16,7 +16,14 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300);
 
 html{
+	position: absolute;
+	width: 100%;
+}
+
+html, body{
 	height: 100%;
+	color: black;
+	font-family: 'Open Sans Condensed', sans-serif;
 }
 
 
@@ -24,10 +31,13 @@ html{
 
 #navBar{
 	margin: 0;
+	height: 80px;
+	position: relative;
 	border-radius: 0;
 	background-color: rgba(255,255,255,0);
 	padding: 5px 0;
 	border-bottom: 1px solid black;
+	z-index: 1;
 }
 
 #menuToggle{
@@ -47,12 +57,19 @@ html{
 }
 
 .linkActions{
+	padding: 40px 0;
+	height: 100px;
+	width: 100%;
+	position: absolute;
+	bottom: 0;
 	text-align: center;
-	margin: 40px 0 20px;
+	background-color: black;
 
 	a{
 		padding: 0 40px;
+		color: white;
 	}
+
 }
 
 .inputField{
@@ -96,6 +113,10 @@ html{
 		}
 	}
 
+	a{
+		color: white;
+	}
+
 /* ------ Error Messages ------ */
 
 #error_explanation{
@@ -126,33 +147,70 @@ html{
 /* -------- Questions Styles -------- */
 
 
-/* ---- Add New Question ---- */
-
 .newQuestionContainer{
-	width: 70%;
-	margin: 0 auto;
-	padding: 20px;
+	width: 100%;
+	min-height: 100%;
+	margin: -80px auto;
+	position: relative;
 	background-color: white;
 	color: rgba(81,81,81,1);
-	border-radius: 10px;
 	font-size: 20px;
+	background-color: rgb(203,232,107);
+	padding: 80px 0 100px;
+	z-index: 0;
 
-	.inputCenter{
-		width: 90%;
-		margin: 0 auto;
+	h2{
+		text-align: center;
 	}
 
-	.questionInputField{
-		padding: 10px;
-		margin: 10px 0;
-		width: 100%;
-		height: 50px;
-		-webkit-border-radius: 6px;
-		-moz-border-radius: 6px;
-		border: 1px solid rgba(130,130,130,1);
-		-webkit-box-sizing: border-box;
-		-moz-box-sizing: border-box;
-		box-sizing: border-box;
+	.questionTitle{
+		padding: 20px 40px;
+		background-color: black;
+		color: white;
+	}
+
+	.newQuestionForm{
+		padding: 100px 0;
+	}
+
+	.formContainer{
+		padding: 60px 20px;
+
+		.inputCenter{
+			width: 90%;
+			margin: 0 auto;
+		}
+
+		.questionInputField{
+			padding: 10px;
+			margin: 10px 0;
+			width: 100%;
+			height: 50px;
+			-webkit-border-radius: 6px;
+			-moz-border-radius: 6px;
+			border: 1px solid rgba(130,130,130,1);
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+		}
+	}
+
+	table{
+		width: 80%;
+		margin: 60px auto;
+
+		tr{
+			border-top: 1px solid black;
+			height: 40px;
+		}
+
+		tr:last-child{
+			border-bottom: 1px solid black;
+		}
+
+		.colRight{
+			text-align: right
+		}
 	}
 }
 
@@ -160,12 +218,16 @@ html{
 /* ---- Show Question ---- */
 
 .showContainer{
-	font-size: 18px;
-	background-color: white;
-	color: rgba(81,81,81,1);
-	border-radius: 10px;
 	width: 100%;
-	margin: 0 auto 50px;
+	min-height: 100%;
+	margin: -80px auto;
+	position: relative;
+	font-size: 18px;
+	background-color: rgb(203,232,107);
+	color: rgba(81,81,81,1);
+	width: 100%;
+	padding: 80px 0 100px;
+	z-index: 0;
 
 	h1{
 		font-size: 50px;
@@ -223,16 +285,6 @@ html{
 			margin: 20px auto;
 			font-size: 26px;
 			text-align: center;
-		}
-	}
-
-
-	table{
-		width: 90%;
-		margin: 60px auto;
-
-		.colRight{
-			text-align: right
 		}
 	}
 
@@ -298,4 +350,53 @@ html{
 			}
 		}
 	}
+
+	/* Missing Data */
+	.missingData{
+		width: 100%;
+		position: relative;
+		padding: 80px 0 100px;
+		z-index: 0;
+		background-color: rgb(203,232,107);
+		text-align: center;
+
+		a{
+			text-align: center;
+			font-size: 50px;
+			color: white;
+		}
+	}
+}
+
+/* --- New Answer --- */
+
+.showAnswerContainer{
+	width: 100%;
+	min-height: 100%;
+	margin: -80px auto;
+	position: relative;
+	font-size: 18px;
+	background-color: rgb(203,232,107);
+	color: rgba(81,81,81,1);
+	width: 100%;
+	padding: 80px 0 100px;
+	z-index: 0;
+
+	.answerInfoContainer{
+		width: 80%;
+		margin: 0 auto;
+	}
+
+	.inputDate{
+		margin-left: 12px;
+	}
+
+	.inputValue{
+		margin-left: 5px;
+	}
+
+	.inputNote{
+		width: 100%;
+	}
+
 }

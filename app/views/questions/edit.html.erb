@@ -1,24 +1,61 @@
 <div class="newQuestionContainer">
 
-	<h1>What question would you like to track?</h1>
+	<div class="questionTitle">
+		<h1>Edit the Question:</h1>
+		<h1><%= @question.text %></h1>
+	</div>
+
 		<%= form_for @question do |f| %>
+
+		<div class="formContainer">
 			<div class="inputCenter">
 				<div>Question:  (i.e.
 				 How many hours of sleep did I get last night?)</div>
 				<%= f.text_field :text, placeholder: "Question", :class => "questionInputField" %>
 				<div>Units (i.e. hours, miles, hugs...):</div>
-				<%= f.text_field :units, placeholder: "Units" %>
+				<%= f.text_field :units, placeholder: "Units", :class => "questionInputField" %>
 			</div>
+		</div>
 		  
-			<div class="buttonCenter">
-			 	 <%= f.submit "Create Question", :class => "inputButton" %>
-			</div>
+		<!-- Data Table Div -->
+
+		<h2>Data Points</h2>
+
+		<div class="dataTable">
+
+			<table>
+				<col width="20%">
+				<col width="20%">
+				<col width="40%">
+				<col width="20%">
+				<th> Date</th>
+				<th>Value</th>
+				<th>Note</th>
+				<th class="colRight">Action</th>
+				<% @answers.each do |a| %>
+					<tr>
+						<td><%= a.date %></td>
+						<td><%= a.value %></td>
+						<td><%= a.note %></td>
+						<td align="right">
+							<%= link_to "Edit", edit_question_answer_path(@question.id, a.id) %>
+							<%= link_to "Delete", question_answer_path(@question.id, a.id), method: :delete, data: {confirm: 'Are you sure you want to delete this data point?'} %></td>
+					</tr>
+				<% end %>
+			</table>
+
+		</div>
+
+		<div class="buttonCenter">
+			 <%= f.submit "Submit", :class => "inputButton" %>
+		</div>
+
 
 		<% end %>
-
+		
 		<div class="linkActions">
 
-			<%= link_to "Cancel", questions_path(@question.id) %>
+			<%= link_to "Cancel", question_path(@question.id) %>
 
 		</div>
 
