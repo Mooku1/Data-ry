@@ -6,21 +6,21 @@ Project2::Application.routes.draw do
 
 	resource :session, only: [:new, :create, :destroy]
 	
-	get 'users/' => 'users#index', as: :users
+	# get 'users/' => 'users#index', as: :users
 	
 	get 'users/new' => 'users#new', as: :new_user
 	
-	get 'users/:id' => 'users#show', as: :user
+	# get 'users/:id' => 'users#show', as: :user
 	
 	post 'users/' => 'users#create'
 	
-	get 'users/:id/edit' => 'users#edit', as: :edit_user
+	# get 'users/:id/edit' => 'users#edit', as: :edit_user
 	
-	patch 'users/:id' => 'users#update'
+	# patch 'users/:id' => 'users#update'
 	
-	delete 'users/:id' => 'users#destroy'
+	# delete 'users/:id' => 'users#destroy'
 	
-	get 'users/:id/reactivate' => 'users#reactivate', as: :reactivate_user
+	# get 'users/:id/reactivate' => 'users#reactivate', as: :reactivate_user
 	
 
 
