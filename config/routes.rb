@@ -20,7 +20,7 @@ Project2::Application.routes.draw do
 	
 	# delete 'users/:id' => 'users#destroy'
 	
-	# get 'users/:id/reactivate' => 'users#reactivate', as: :reactivate_user
+	get 'users/:id/reactivate' => 'users#reactivate', as: :reactivate_user
 	
 
 
